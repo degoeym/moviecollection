@@ -1,15 +1,9 @@
 import * as types from './actionTypes';
 import axios from 'axios';
 
-<<<<<<< HEAD
-//var axiosInstance = axios.create({
-//    baseURL: 'http://moviecollectionapi20170925.azurewebsites.net'
-//});
-=======
 var axiosInstance = axios.create({
     baseURL: 'http://moviecollectionapi20170925.azurewebsites.net'
 });
->>>>>>> 0fccf90ad524e215ed723a83e74cb44dcbf6b114
 
 export function getMoviesSuccess(movies) {
     debugger;
@@ -35,12 +29,6 @@ export function deleteMovieSuccess(movie) {
 export function getMovies() {
     debugger;
     return function(dispatch) {
-<<<<<<< HEAD
-        axios.get('http://moviecollectionapi20170925.azurewebsites.net/api/movies')
-        .then(({data}) => {
-            debugger;
-            dispatch(getMoviesSuccess(data))
-=======
         axiosInstance.get('/api/movies')
         .then(({data}) => {
             debugger;
@@ -57,7 +45,6 @@ export function getMovie(id) {
         axiosInstance.get(`/api/movies/${id}`)
         .then(({data}) => {
             dispatch(getMovieSuccess(data));
->>>>>>> 0fccf90ad524e215ed723a83e74cb44dcbf6b114
         }).catch(error => {
             debugger;
             throw(error);

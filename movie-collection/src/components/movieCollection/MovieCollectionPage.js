@@ -8,17 +8,11 @@ import * as movieCollectionActions from '../../actions/movieCollectionApiActions
 import MovieList from './MovieList';
 
 class MovieCollectionPage extends React.Component {
-<<<<<<< HEAD
-    //constructor(props, context) {
-    //    super(props, context);
-    //}
-=======
     constructor(props, context) {
         super(props, context);
 
         this.redirectToAddMoviePage = this.redirectToAddMoviePage.bind(this);
     }
->>>>>>> 0fccf90ad524e215ed723a83e74cb44dcbf6b114
 
     componentDidMount() {
         this.props.actions.getMovies();
@@ -32,12 +26,8 @@ class MovieCollectionPage extends React.Component {
     render() {
         return (
             <div>
-<<<<<<< HEAD
-                {this.props.movies.length > 0 && <MovieList movies={this.props.movies} />}
-=======
                 <input type="button" value="Add Movie" className="btn btn-primary" onClick={this.redirectToAddMoviePage} />
                 { this.props.movies.length > 0 && <MovieList movies={this.props.movies} />}                
->>>>>>> 0fccf90ad524e215ed723a83e74cb44dcbf6b114
             </div>
         );
     }
