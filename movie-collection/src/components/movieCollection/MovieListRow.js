@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 
 const MovieListRow = ({movie}) => {
     var rating = "";
@@ -32,6 +32,8 @@ const MovieListRow = ({movie}) => {
             <td>{movie.title}</td>
             <td>{movie.description}</td>
             <td>{rating}</td>
+            <td><Link to={`/movieCollection/${movie.id}`}>Details</Link></td>
+            <td><Link to={`/movieCollection/edit/${movie.id}`}>Edit</Link></td>
         </tr>
     );
 };
