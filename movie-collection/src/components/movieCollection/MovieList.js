@@ -2,6 +2,7 @@ import React from 'react';
 import MovieListRow from './MovieListRow';
 
 const MovieList = ({movies}) => {
+    debugger;
     return (
         <table className="table">
             <thead>
@@ -9,6 +10,8 @@ const MovieList = ({movies}) => {
                     <th>Title</th>
                     <th>Description</th>
                     <th>Rating</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>

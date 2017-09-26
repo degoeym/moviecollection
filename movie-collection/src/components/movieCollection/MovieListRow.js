@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import React from 'react';
 //import {Link} from 'react-router';
+=======
+import React, {PropTypes} from 'react';
+import {Link} from 'react-router-dom';
+>>>>>>> 0fccf90ad524e215ed723a83e74cb44dcbf6b114
 
 const MovieListRow = ({movie}) => {
     var rating = "";
@@ -32,6 +37,8 @@ const MovieListRow = ({movie}) => {
             <td>{movie.title}</td>
             <td>{movie.description}</td>
             <td>{rating}</td>
+            <td><Link to={`/movieCollection/${movie.id}`}>Details</Link></td>
+            <td><Link to={`/movieCollection/edit/${movie.id}`}>Edit</Link></td>
         </tr>
     );
 };
