@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
-import movieCollectionApi from './movieCollectionApiReducer';
+import movieCollection from './movieCollectionApiReducer';
 
 const rootReducer = combineReducers({
-    movieCollectionApi
+    movieCollection
 });
 
 export default rootReducer;

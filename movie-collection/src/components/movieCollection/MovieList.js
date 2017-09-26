@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import MovieListRow from './MovieListRow';
 
 const MovieList = ({movies}) => {

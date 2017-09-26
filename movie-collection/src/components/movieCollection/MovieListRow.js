@@ -1,5 +1,5 @@
-import React, {PropTypes} from 'react';
-import {Link} from 'react-router';
+import React from 'react';
+//import {Link} from 'react-router';
 
 const MovieListRow = ({movie}) => {
     var rating = "";

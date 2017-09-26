@@ -1,9 +1,9 @@
 import * as types from './actionTypes';
 import axios from 'axios';
 
-var axiosInstance = axios.create({
-    baseURL: 'http://localhost:5381/api/movies'
-});
+//var axiosInstance = axios.create({
+//    baseURL: 'http://moviecollectionapi20170925.azurewebsites.net'
+//});
 
 export function getMoviesSuccess(movies) {
     debugger;
@@ -29,11 +29,12 @@ export function deleteMovieSuccess(movie) {
 export function getMovies() {
     debugger;
     return function(dispatch) {
-        axiosInstance.get()
-        .then(({response}) => {
+        axios.get('http://moviecollectionapi20170925.azurewebsites.net/api/movies')
+        .then(({data}) => {
             debugger;
-            dispatch(getMoviesSuccess(response.data))
+            dispatch(getMoviesSuccess(data))
         }).catch(error => {
+            debugger;
             throw(error);
         });
     };

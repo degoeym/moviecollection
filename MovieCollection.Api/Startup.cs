@@ -19,11 +19,12 @@ namespace MovieCollection.Api
     {
         public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddEnvironmentVariables();
+            //var builder = new ConfigurationBuilder()
+            //    .SetBasePath(env.ContentRootPath)
+            //    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            //    .AddEnvironmentVariables();
 
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -34,7 +35,7 @@ namespace MovieCollection.Api
             services.AddMvc();
 
             // setup movie collection db context
-            var connectionString = Configuration["connectionStrings:movieCollectionDbConnectionString"];
+            var connectionString = Configuration["ConnectionStrings:movieCollectionDbConnectionString"];
             services.AddDbContext<MovieCollectionContext>(o => o.UseSqlServer(connectionString));
 
             // inject movie repo

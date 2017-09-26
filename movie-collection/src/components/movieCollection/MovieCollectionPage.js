@@ -1,13 +1,13 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as movieCollectionActions from '../../actions/movieCollectionApiActions';
 import MovieList from './MovieList';
 
 class MovieCollectionPage extends React.Component {
-    constructor(props, context) {
-        super(props, context);
-    }
+    //constructor(props, context) {
+    //    super(props, context);
+    //}
 
     componentWillMount() {
         this.props.actions.getMovies();
@@ -16,7 +16,7 @@ class MovieCollectionPage extends React.Component {
     render() {
         return (
             <div>
-                <MovieList movies={this.props.movies} />
+                {this.props.movies.length > 0 && <MovieList movies={this.props.movies} />}
             </div>
         );
     }
