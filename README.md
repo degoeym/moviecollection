@@ -28,4 +28,5 @@ Fleshing out the site to include user profiles would make it infinitely more use
   **NOTE** All changes listed here may not be live on their hosted versions just yet. I've simply checekd in the changes after testing them locally.
   * Fixed "flicker" issue with details page.
   * Revamped store to store collection and a single movie separately. Should enhance details page to pull from store collection if movie ID exists, otherwise call out to the api to try and find the movie matching the provided ID.
+   * This required additional changes to the reducer. Unit tests would definitely be a great thing to add to catch items like this sooner.
   * Updated Startup.cs to allow any source from CORS. Naturally this would *not* be ideal in a production app. This is simply for the purposes of demonstrating this app.
