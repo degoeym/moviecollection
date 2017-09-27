@@ -1,11 +1,11 @@
 import React from 'react';
 
-const MovieForm = ({movie, onSave, onChange, saving, isEdit}) => {
+const MovieForm = ({movie, onSave, onChange, onCancel, saving, isEdit}) => {
     debugger;
     var releaseDate = (isEdit) ? getReleaseDate(movie.releaseDate) : movie.releaseDate;
     return (
         <form>
-            <h1>Manage Movie</h1>
+            <h1>{isEdit ? 'Edit' : 'Add'} Movie</h1>
             <label htmlFor='title'>Title</label>
             <div className="field">
                 <input type="text" name='title' className="form-control" 
@@ -35,6 +35,7 @@ const MovieForm = ({movie, onSave, onChange, saving, isEdit}) => {
                 value={saving ? 'Saving...' : 'Save'} 
                 className="btn btn-primary" 
                 onClick={onSave} />
+            <input type='button' value='Cancel' className='btn btn-danger' onClick={onCancel}/>
         </form>
     )
 }

@@ -1,9 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Switch, Route} from 'react-router-dom';
-import MovieDetailsPage from '../movieCollection/MovieDetailsPage';
-import MovieForm from '../movieCollection/MovieForm'; 
 import * as movieCollectionActions from '../../actions/movieCollectionApiActions';
 import MovieList from './MovieList';
 

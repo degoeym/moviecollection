@@ -12,14 +12,12 @@ const Header = () => {
                         <span className="icon-bar"></span>
                         <span className="icon-bar"></span>
                     </button>
-                    <a className="navbar-brand" href="#">React Test App</a>
+                    <Link to='/' className="navbar-brand">Movie Collection</Link>
                 </div>
 
                 <div className="collapse navbar-collapse" id="testapp-navbar">
                     <ul className="nav navbar-nav">
-                        <li className="active"><Link to="/">Home</Link></li>
-                        <li><Link to="/movieCollection">Movie Collection</Link></li>
-                        <li><Link to="/about">About</Link></li>
+                        <li><Link to="/movieCollection">Collection</Link></li>
                     </ul>
                 </div>
             </div>

@@ -63,8 +63,9 @@ export function addMovie(movie) {
             .then(({data}) => {
                 debugger;
                 dispatch(addMovieSuccess(data));
-            }).catch(error => {
-                throw(error);
+            }).catch(response => {
+                debugger;
+                return Promise.reject(response.json());
             });
     };
 }

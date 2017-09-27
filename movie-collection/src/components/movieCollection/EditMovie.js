@@ -15,11 +15,12 @@ class EditMovie extends React.Component {
 
         this.updateMovieState = this.updateMovieState.bind(this);
         this.updateMovie = this.updateMovie.bind(this);
+        this.cancelEdit = this.cancelEdit.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
         debugger;
-        if(this.props.movie.id != nextProps.movie.id) {
+        if(this.props.movie.id !== nextProps.movie.id) {
             this.setState({movie: Object.assign({}, nextProps.movie)});
         }
     }
@@ -50,12 +51,17 @@ class EditMovie extends React.Component {
         this.props.history.push('/movieCollection');
     }
 
+    cancelEdit() {
+        this.props.history.push('/movieCollection');
+    }
+
     render() {
         debugger;
         return (
             <MovieForm movie={this.state.movie}
                 onChange={this.updateMovieState} 
                 onSave={this.updateMovie} 
+                onCancel={this.cancelEdit} 
                 saving={this.state.saving} 
                 isEdit={true} />
         )
@@ -73,7 +79,7 @@ function getMovieFromCollection(movieCollection, movieId) {
 
 function mapStateToProps(state, ownProps) {
     debugger;
-    const movieId = parseInt(ownProps.match.params.id);
+    const movieId = parseInt(ownProps.match.params.id, 10);
     let movie = {title: '', description: '', rating: '', releaseDate: ''};
 
     if (state.movieCollection.length > 0) {

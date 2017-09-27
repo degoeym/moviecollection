@@ -15,6 +15,7 @@ class AddMovie extends React.Component {
 
         this.addMovie = this.addMovie.bind(this);
         this.updateMovieState = this.updateMovieState.bind(this);
+        this.cancelAdd = this.cancelAdd.bind(this);
     }
 
     updateMovieState(event) {
@@ -41,12 +42,17 @@ class AddMovie extends React.Component {
         this.props.history.push('/movieCollection');
     }
 
+    cancelAdd() {
+        this.props.history.push('/movieCollection');
+    }
+
     render() {
         debugger;
         return (
             <MovieForm movie={this.state.movie}
                 onChange={this.updateMovieState} 
                 onSave={this.addMovie} 
+                onCancel={this.cancelAdd} 
                 saving={this.state.saving}
                 isEdit={false} />
         )

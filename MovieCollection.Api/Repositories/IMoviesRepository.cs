@@ -8,12 +8,12 @@ namespace MovieCollection.Api.Repositories
 {
     public interface IMoviesRepository
     {
-        bool MovieExists(int id);
-        bool MovieExists(string title);
-        IEnumerable<Movie> GetMovies();
-        Movie GetMovie(int id);
+        Task<bool> MovieExists(int id);
+        Task<bool> MovieExists(string title);
+        Task<IEnumerable<Movie>> GetMovies();
+        Task<Movie> GetMovie(int id);
         void AddMovie(Movie movie);
         void DeleteMovie(Movie movie);
-        bool Save();
+        Task<bool> Save();
     }
 }

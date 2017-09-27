@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {withRouter} from 'react-router-dom';
 import * as movieCollectionActions from '../../actions/movieCollectionApiActions';
 
 class MovieDetailsPage extends React.Component{
