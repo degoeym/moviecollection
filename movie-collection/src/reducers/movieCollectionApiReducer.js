@@ -12,16 +12,16 @@ export default function redditApiReducer(state = initialState.movieCollection, a
             return {...state, movie: action.movie};
 
         case types.ADD_MOVIE_SUCCESS:
-            return [...state.collection, 
-                Object.assign({}, action.movie) ];
+            return {...state, 
+                collection: [...state.collection, action.movie] };
 
         case types.UPDATE_MOVIE_SUCCESS:
-            debugger;
-            return [
-                ...state.collection.filter(movie => 
-                    movie.id !== action.movie.id),
-                Object.assign({}, action.movie)
-            ];
+            return {...state,
+                collection: [...state.collection.filter(movie => 
+                    movie.id !== action.movie.id), 
+                    Object.assign({}, action.movie)
+                ]
+            };
 
         case types.UNLOAD_MOVIE:
             return {...state, movie: []};

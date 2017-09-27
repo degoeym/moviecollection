@@ -82,9 +82,11 @@ export function updateMovie(movie) {
                 rating: movie.rating,
                 releaseDate: movie.releaseDate
             })
-            .then(({data}) => {
-                dispatch(updateMovieSuccess(data));
+            .then(() => {
+                debugger;
+                dispatch(updateMovieSuccess(movie));
             }).catch(error => {
+                debugger;
                 throw(error);
             });
     };
