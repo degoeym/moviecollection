@@ -21,3 +21,11 @@ The most obvious improvement this app would need is proper form validation, eith
 Additionally, there's a slight flicker when loading the details page for any given movie. Not a showstopper, but something that should definitely be dealt with.
 
 Fleshing out the site to include user profiles would make it infinitely more useful, and implementing a better way to search for and obtain information on movies in the collection would be a great enhancement. I'd likely look to implement The Movie Database's API for such endeavors.
+
+## UPDATES
+27 September 2017:
+
+  **NOTE** All changes listed here may not be live on their hosted versions just yet. I've simply checekd in the changes after testing them locally.
+  * Fixed "flicker" issue with details page.
+  * Revamped store to store collection and a single movie separately. Should enhance details page to pull from store collection if movie ID exists, otherwise call out to the api to try and find the movie matching the provided ID.
+  * Updated Startup.cs to allow any source from CORS. Naturally this would *not* be ideal in a production app. This is simply for the purposes of demonstrating this app.
