@@ -28,6 +28,11 @@ namespace MovieCollection.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddCors(options => {
+                options.AddPolicy("AllowAllOrigins", 
+                    builder => builder.AllowAnyOrigin()
+                                        .AllowAnyMethod());
+            });
 
             // setup movie collection db context
             var connectionString = Configuration["ConnectionStrings:movieCollectionDbConnectionString"];
@@ -58,6 +63,8 @@ namespace MovieCollection.Api
                 config.CreateMap<MovieUpdateDto, Movie>();
                 config.CreateMap<Movie, MovieUpdateDto>();
             });
+
+            app.UseCors("AllowAllOrigins");
 
             app.UseMvc();
         }

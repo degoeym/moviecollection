@@ -82,8 +82,9 @@ function mapStateToProps(state, ownProps) {
     const movieId = parseInt(ownProps.match.params.id, 10);
     let movie = {title: '', description: '', rating: '', releaseDate: ''};
 
-    if (state.movieCollection.length > 0) {
-        movie = getMovieFromCollection(state.movieCollection, movieId);
+    if (state.movieCollection.collection.length > 0) {
+        movie = getMovieFromCollection(state.movieCollection.collection, 
+            movieId);
     }
 
     return {
