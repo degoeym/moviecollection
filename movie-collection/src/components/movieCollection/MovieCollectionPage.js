@@ -33,7 +33,7 @@ class MovieCollectionPage extends React.Component {
 function mapStateToProps(state, ownProps) {
     debugger;
     return {
-        movies: state.movieCollection
+        movies: state.movieCollection.collection
     };
 }
 

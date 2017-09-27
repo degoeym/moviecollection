@@ -1,3 +1,6 @@
 export default {
-    movieCollection: []
+    movieCollection: {
+        collection: [],
+        movie: []
+    }
 }

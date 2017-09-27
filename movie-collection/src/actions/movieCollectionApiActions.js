@@ -2,7 +2,7 @@ import * as types from './actionTypes';
 import axios from 'axios';
 
 var axiosInstance = axios.create({
-    baseURL: 'http://moviecollectionapi20170925.azurewebsites.net'
+    baseURL: 'http://moviecollectionapi20170925.azurewebsites.net/'
 });
 
 export function getMoviesSuccess(movies) {
@@ -24,6 +24,10 @@ export function updateMovieSuccess(movie) {
 
 export function deleteMovieSuccess(movie) {
     return { type: types.DELETE_MOVIE_SUCCESS, movie };
+}
+
+export function unloadMovie() {
+    return { type: types.UNLOAD_MOVIE }
 }
 
 export function getMovies() {
