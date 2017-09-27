@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MovieCollection.Api.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace MovieCollection.Api.Repositories
 {
@@ -25,29 +26,29 @@ namespace MovieCollection.Api.Repositories
             _context.Movies.Remove(movie);
         }
 
-        public Movie GetMovie(int id)
+        public async Task<Movie> GetMovie(int id)
         {
-            return _context.Movies.FirstOrDefault(m => m.Id == id);
+            return await _context.Movies.FirstOrDefaultAsync(m=> m.Id == id);
         }
 
-        public IEnumerable<Movie> GetMovies()
+        public async Task<IEnumerable<Movie>> GetMovies()
         {
-            return _context.Movies.OrderBy(m => m.Title).ToList();
+            return await _context.Movies.OrderBy(m => m.Title).ToListAsync();
         }
 
-        public bool MovieExists(int id)
+        public async Task<bool> MovieExists(int id)
         {
-            return _context.Movies.Any(m => m.Id == id);
+            return await _context.Movies.AnyAsync(m => m.Id == id);
         }
 
-        public bool MovieExists(string title)
+        public async Task<bool> MovieExists(string title)
         {
-            return _context.Movies.Any(m => m.Title.ToLower() == title.ToLower());
+            return await _context.Movies.AnyAsync(m => m.Title.ToLower() == title.ToLower());
         }
 
-        public bool Save()
+        public async Task<bool> Save()
         {
-            return (_context.SaveChanges() >= 0);
+            return (await _context.SaveChangesAsync() >= 0);
         }
     }
 }

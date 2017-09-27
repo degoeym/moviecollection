@@ -25,18 +25,18 @@ namespace MovieCollection.Api.Controllers
 
         // GET: api/values
         [HttpGet]
-        public IActionResult GetMovies()
+        public async Task<IActionResult> GetMovies()
         {
-            var movies = _moviesRepository.GetMovies();
+            var movies = await _moviesRepository.GetMovies();
             var results = Mapper.Map<IEnumerable<MovieDto>>(movies);
             return Ok(results);
         }
 
         // GET api/values/5
         [HttpGet("{id}", Name = "GetMovie")]
-        public IActionResult GetMovie(int id)
+        public async Task<IActionResult> GetMovie(int id)
         {
-            var movie = _moviesRepository.GetMovie(id);
+            var movie = await _moviesRepository.GetMovie(id);
             if (movie == null)
             {
                 return NotFound();
@@ -48,7 +48,7 @@ namespace MovieCollection.Api.Controllers
 
         // POST api/values
         [HttpPost]
-        public IActionResult AddMovie([FromBody] MovieCreateDto movie)
+        public async Task<IActionResult> AddMovie([FromBody] MovieCreateDto movie)
         {
             if (movie == null)
             {
@@ -60,20 +60,23 @@ namespace MovieCollection.Api.Controllers
                 ModelState.AddModelError("Description", "Description and title cannot be the same.");
             }
 
-            if (_moviesRepository.MovieExists(movie.Title))
+            if (await _moviesRepository.MovieExists(movie.Title))
             {
                 ModelState.AddModelError("Title", "Movie by that title already exists.");
             }
 
+            movie.InventoryDate = DateTime.Now;
+            movie.UpdatedDate = DateTime.Now;
             if (!ModelState.IsValid)
             {
-                return BadRequest(movie);
+                return BadRequest(ModelState);
             }
 
             var newMovie = Mapper.Map<Movie>(movie);
             _moviesRepository.AddMovie(newMovie);
+            var saved = await _moviesRepository.Save();
 
-            if (!_moviesRepository.Save())
+            if (!saved)
             {
                 return StatusCode(500, "Issue adding movie to collection. Please try again.");
             }
@@ -85,7 +88,7 @@ namespace MovieCollection.Api.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public IActionResult UpdateMovie(int id, [FromBody] MovieUpdateDto movie)
+        public async Task<IActionResult> UpdateMovie(int id, [FromBody] MovieUpdateDto movie)
         {
             if (movie == null)
             {
@@ -102,20 +105,24 @@ namespace MovieCollection.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (!_moviesRepository.MovieExists(id))
+            var movieExists = await _moviesRepository.MovieExists(id);
+
+            if (!movieExists)
             {
                 return NotFound();
             }
 
-            var movieToUpdate = _moviesRepository.GetMovie(id);
+            var movieToUpdate = await _moviesRepository.GetMovie(id);
             if (movieToUpdate == null)
             {
                 return NotFound();
             }
 
+            movie.UpdatedDate = DateTime.Now;
             Mapper.Map(movie, movieToUpdate);
+            var saved = await _moviesRepository.Save();
 
-            if (!_moviesRepository.Save())
+            if (!saved)
             {
                 return StatusCode(500, "Issue updating movie. Please try again.");
             }
@@ -124,19 +131,21 @@ namespace MovieCollection.Api.Controllers
         }
 
         [HttpPatch("{id}")]
-        public IActionResult PartiallyUpdateMovie(int id, [FromBody] JsonPatchDocument<MovieUpdateDto> patch)
+        public async Task<IActionResult> PartiallyUpdateMovie(int id, [FromBody] JsonPatchDocument<MovieUpdateDto> patch)
         {
             if (patch == null)
             {
                 return BadRequest();
             }
 
-            if (!_moviesRepository.MovieExists(id))
+            var movieExists = await _moviesRepository.MovieExists(id);
+
+            if (!movieExists)
             {
                 return NotFound();
             }
 
-            var movieToUpdate = _moviesRepository.GetMovie(id);
+            var movieToUpdate = await _moviesRepository.GetMovie(id);
             if (movieToUpdate == null)
             {
                 return NotFound();
@@ -156,6 +165,7 @@ namespace MovieCollection.Api.Controllers
                 ModelState.AddModelError("Description", "Description and title cannot be the same.");
             }
 
+            movieToPatch.UpdatedDate = DateTime.Now;
             TryValidateModel(movieToPatch);
 
             if (!ModelState.IsValid)
@@ -164,7 +174,9 @@ namespace MovieCollection.Api.Controllers
             }
 
             Mapper.Map(movieToPatch, movieToUpdate);
-            if (!_moviesRepository.Save())
+            var saved = await _moviesRepository.Save();
+
+            if (!saved)
             {
                 return StatusCode(500, "Problem updating movie. Please try again.");
             }
@@ -174,21 +186,23 @@ namespace MovieCollection.Api.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (!_moviesRepository.MovieExists(id))
+            var movieExists = await _moviesRepository.MovieExists(id);
+            if (!movieExists)
             {
                 return NotFound();
             }
 
-            var movieToDelete = _moviesRepository.GetMovie(id);
+            var movieToDelete = await _moviesRepository.GetMovie(id);
             if (movieToDelete == null)
             {
                 return NotFound();
             }
 
             _moviesRepository.DeleteMovie(movieToDelete);
-            if (!_moviesRepository.Save())
+            var saved = await _moviesRepository.Save();
+            if (!saved)
             {
                 return StatusCode(500, "Could not delete movie. Please try again.");
             }
